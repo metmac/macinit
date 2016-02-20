@@ -6,24 +6,7 @@
 # https://github.com/lapwinglabs/blog/blob/master/hacker-guide-to-setting-up-your-mac.md
 
 {
-  # get user options
-  echo "Name: "
-  read -e name
-  echo "Email: "
-  read -e email
-  echo "GitHub username: "
-  read -e username
-  echo "GitHub password: "
-  read -es password
-  echo "ssh key name: "
-  read -e keyname
-  echo "Dotfiles repo path: "
-  read -e dotfiles
-
-
   # install brew
-  # check for Homebrew,
-  # install if we don't have it
   if test ! $(which brew); then
     echo "Installing homebrew..."
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -56,7 +39,7 @@
   brew install ${binaries[@]}
   brew cleanup
 
-  # install Apps
+  # install apps
   echo "Installing apps..."
   apps=(
     dropbox
@@ -75,22 +58,30 @@
 
   # setup git
   echo "Setting up git..."
-  git config --global user.name "${name}"
-  git config --global user.email "${email}"
+  git config --global user.name \
+    "$(read -p 'Name: ' name; echo $name; unset name)"
+  git config --global user.email \
+    "$(read -p 'Email: ' email; echo $email)"
 
   # generate ssh key
   echo "Generating ssh key..."
-  ssh-keygen -t rsa -b 4096 -C "${email}"
+  ssh-keygen -t rsa -b 4096 -C "$(echo $email; unset email)"
   eval "$(ssh-agent -s)"
   ssh-add ~/.ssh/id_rsa
 
   # add key to github
-  echo "Adding ssh key to GitHub..."
-  curl -u "${username}:${password}" --data '{"title":"${keyname}","key":"$(cat ~/.ssh/id_rsa.pub)"}' https://api.github.com/user/keys
+  curl -u \
+    "$(read -p 'GitHub username: ' uname; echo $uname; unset uname):\
+    $(read -sp 'GitHub password: ' passwd; echo $passwd; unset passwd)" \
+    --data '{"title":"${HOSTNAME}","key":"$(cat ~/.ssh/id_rsa.pub)"}' \
+    https://api.github.com/user/keys
+  echo "Added ssh key to GitHub."
 
   # clone repos
-  echo "Cloning dotfiles repo..."
-  git clone https://github.com/${dotfiles} ~/src/dotfiles
+  git clone https://github.com/\
+    $(read -p "Dotfiles repo path: " dotfiles; echo $dotfiles; unset dotfiles) \
+    ~/src/dotfiles
+  echo "Cloned dotfiles repo."
 
   # link the dotfiles
   echo "Linking dotfiles..."
@@ -128,13 +119,6 @@
   nvm install stable
   nvm use stable
   nvm alias default stable
-
-  # cleanup
-  unset name
-  unset email
-  unset username
-  unset password
-  unset dotfiles
 
   # done
   echo "Done."
