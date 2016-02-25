@@ -111,6 +111,7 @@
   echo "Setting up vim..."
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   vim +PluginInstall +qall
+  mkdir ~/.vim/undo
 
   # install nvm
   echo "Installing nvm..."
