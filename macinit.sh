@@ -20,6 +20,7 @@
     bash
     bash-completion
     caskroom/cask/brew-cask
+    closure-compiler
     ffmpeg
     git
     homebrew/dupes/grep
@@ -120,6 +121,9 @@
   nvm install stable
   nvm use stable
   nvm alias default stable
+
+  # switch shells
+  chsh -s /usr/local/bin/bash
 
   # done
   echo "Done."
