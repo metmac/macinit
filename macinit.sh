@@ -32,6 +32,7 @@
     python
     python3
     screenfetch
+    reattach-to-user-namespace
     tmux
     vim
   )
