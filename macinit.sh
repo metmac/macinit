@@ -20,6 +20,7 @@
     bash
     bash-completion
     caskroom/cask/brew-cask
+    Caskroom/cask/java
     closure-compiler
     ffmpeg
     git
