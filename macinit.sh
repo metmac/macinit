@@ -59,30 +59,35 @@
   brew cask install --appdir="/Applications" ${apps[@]}
 
   # setup git
-  echo "Setting up git..."
-  git config --global user.name \
-    "$(read -p 'Name: ' name; echo $name; unset name)"
-  git config --global user.email \
-    "$(read -p 'Email: ' email; echo $email)"
+  read -p 'Name: ' name
+  git config --global user.name "${name}"
+  unset name
+  read -p 'Email: ' email
+  git config --global user.email "${email}"
+  echo "Set up git."
 
   # generate ssh key
   echo "Generating ssh key..."
-  ssh-keygen -t rsa -b 4096 -C "$(echo $email; unset email)"
+  ssh-keygen -t rsa -b 4096 -C "${email}"
+  unset email
   eval "$(ssh-agent -s)"
   ssh-add ~/.ssh/id_rsa
 
   # add key to github
+  read -p 'GitHub username: ' uname
+  read -sp 'GitHub password: ' passwd
   curl -u \
-    "$(read -p 'GitHub username: ' uname; echo $uname; unset uname):\
-    $(read -sp 'GitHub password: ' passwd; echo $passwd; unset passwd)" \
+    "${uname}:${passwd}" \
     --data '{"title":"${HOSTNAME}","key":"$(cat ~/.ssh/id_rsa.pub)"}' \
     https://api.github.com/user/keys
+  unset uname
+  unset passwd
   echo "Added ssh key to GitHub."
 
   # clone repos
-  git clone https://github.com/\
-    $(read -p "Dotfiles repo path: " dotfiles; echo $dotfiles; unset dotfiles) \
-    ~/src/dotfiles
+  read -p "Dotfiles repo path: " dotfiles
+  git clone https://github.com/${dotfiles}  ~/src/dotfiles
+  unset dotfiles
   echo "Cloned dotfiles repo."
 
   # link the dotfiles
