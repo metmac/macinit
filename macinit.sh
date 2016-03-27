@@ -15,14 +15,15 @@
   # install binaries
   echo "Installing binaries..."
   binaries=(
-    coreutils
-    findutils
+    asciinema
     bash
     bash-completion
     caskroom/cask/brew-cask
     Caskroom/cask/java
+    coreutils
     closure-compiler
     ffmpeg
+    findutils
     git
     homebrew/dupes/grep
     htop
@@ -118,8 +119,6 @@
   # setup vim
   echo "Setting up vim..."
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-  mkdir -p ~/.vim/colors
-  curl -o- https://raw.githubusercontent.com/chriskempson/base16-vim/master/colors/base16-bright.vim > ~/.vim/colors/base16-bright.vim
   vim +PluginInstall +qall
   mkdir ~/.vim/undo
 
@@ -131,16 +130,7 @@
   nvm use stable
   nvm alias default stable
 
-  # set up colors
-  echo "Setting up base16-bright colorscheme..."
-  mkdir -p ~/.config/base16-shell
-  curl -o- https://raw.githubusercontent.com/chriskempson/base16-shell/master/base16-bright.dark.sh > ~/.config/base16-shell/base16-bright.dark.sh
-  chmod +x ~/.config/base16-shell/base16-bright.dark.sh
-  curl -o- https://raw.githubusercontent.com/chriskempson/base16-iterm2/master/base16-bright.dark.256.itermcolors > ~/Desktop/base16-bright.dark.256.itermcolors
-
-  # switch shells
-  chsh -s /usr/local/bin/bash
-
-  # done
-  echo "Done."
+  # echo switch shells command
+  echo "To finish setup, execute the following command:"
+  echo "chsh -s /usr/local/bin/bash"
 }
