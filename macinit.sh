@@ -30,6 +30,7 @@
     irssi
     leiningen
     mongodb
+    mutt
     nmap
     python
     python3
@@ -37,6 +38,7 @@
     reattach-to-user-namespace
     tmux
     vim
+    youtube-dl
   )
   brew update
   brew tap homebrew/dupes
