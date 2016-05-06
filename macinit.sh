@@ -29,6 +29,7 @@
     htop
     irssi
     leiningen
+    lua
     mongodb
     mutt
     nmap
