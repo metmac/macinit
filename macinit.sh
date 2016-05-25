@@ -25,6 +25,7 @@
     ffmpeg
     findutils
     git
+    golang
     homebrew/dupes/grep
     htop
     irssi
