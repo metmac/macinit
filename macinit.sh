@@ -18,7 +18,8 @@
     asciinema
     bash
     bash-completion
-    caskroom/cask/brew-cask
+    Caskroom/cask/brew-cask
+    Caskroom/cask/haskell-platform
     Caskroom/cask/java
     coreutils
     closure-compiler
