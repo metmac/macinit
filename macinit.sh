@@ -101,25 +101,25 @@
   # link the dotfiles
   echo "Linking dotfiles..."
   if [ -f ~/src/dotfiles/bash_aliases ]; then
-    ln -s ../../.bash_aliases ~/src/dotfiles/bash_aliases
+    ln -s ~/src/dotfiles/bash_aliases ~/.bash_aliases
   fi
   if [ -f ~/src/dotfiles/bash_colors ]; then
-    ln -s ../../.bash_colors ~/src/dotfiles/bash_colors
+    ln -s ~/src/dotfiles/bash_colors ~/.bash_colors
   fi
   if [ -f ~/src/dotfiles/bashrc ]; then
-    ln -s ../../.bash_profile ~/src/dotfiles/bashrc
+    ln -s ~/src/dotfiles/bashrc ~/.bash_profile
   fi
   if [ -f ~/src/dotfiles/gitconfig ]; then
-    ln -s ../../.gitconfig ~/src/dotfiles/gitconfig
+    ln -s ~/src/dotfiles/gitconfig ~/.gitconfig
   fi
   if [ -f ~/src/dotfiles/gitignore ]; then
-    ln -s ../../.gitignore ~/src/dotfiles/gitignore
+    ln -s ~/src/dotfiles/gitignore ~/.gitignore
   fi
   if [ -f ~/src/dotfiles/tmux.conf ]; then
-    ln -s ../../.tmux.conf ~/src/dotfiles/tmux.conf
+    ln -s ~/src/dotfiles/tmux.conf ~/.tmux.conf
   fi
   if [ -f ~/src/dotfiles/vimrc ]; then
-    ln -s ../../.vimrc ~/src/dotfiles/vimrc
+    ln -s ~/src/dotfiles/vimrc ~/.vimrc
   fi
 
   # setup vim
