@@ -39,6 +39,7 @@
     python3
     screenfetch
     reattach-to-user-namespace
+    rust
     tmux
     vim
     youtube-dl
