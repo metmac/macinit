@@ -6,10 +6,12 @@
 # https://github.com/lapwinglabs/blog/blob/master/hacker-guide-to-setting-up-your-mac.md
 
 {
+  COUT="macinit.out"
+
   # install brew
   if test ! $(which brew); then
     echo "Installing homebrew..."
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" >> ${COUT}
   fi
 
   # install binaries
@@ -44,10 +46,10 @@
     vim
     youtube-dl
   )
-  brew update
-  brew tap homebrew/dupes
-  brew install ${binaries[@]}
-  brew cleanup
+  brew update >> ${COUT}
+  brew tap homebrew/dupes >> ${COUT}
+  brew install ${binaries[@]} >> ${COUT}
+  brew cleanup >> ${COUT}
 
   # install apps
   echo "Installing apps..."
@@ -64,7 +66,7 @@
     transmission
     vlc
   )
-  brew cask install --appdir="/Applications" ${apps[@]}
+  brew cask install --appdir="/Applications" ${apps[@]} >> ${COUT}
 
   # setup git
   read -p 'Name: ' name
@@ -76,10 +78,10 @@
 
   # generate ssh key
   echo "Generating ssh key..."
-  ssh-keygen -t rsa -b 4096 -C "${email}"
+  ssh-keygen -t rsa -b 4096 -C "${email}" >> ${COUT}
   unset email
-  eval "$(ssh-agent -s)"
-  ssh-add ~/.ssh/id_rsa
+  eval "$(ssh-agent -s)" >> ${COUT}
+  ssh-add ~/.ssh/id_rsa >> ${COUT}
 
   # add key to github
   read -p 'GitHub username: ' uname
@@ -87,14 +89,14 @@
   curl -u \
     "${uname}:${passwd}" \
     --data '{"title":"${HOSTNAME}","key":"$(cat ~/.ssh/id_rsa.pub)"}' \
-    https://api.github.com/user/keys
+    https://api.github.com/user/keys >> ${COUT}
   unset uname
   unset passwd
   echo "Added ssh key to GitHub."
 
   # clone repos
   read -p "Dotfiles repo path: " dotfiles
-  git clone https://github.com/${dotfiles}  ~/src/dotfiles
+  git clone https://github.com/${dotfiles}  ~/src/dotfiles >> ${COUT}
   unset dotfiles
   echo "Cloned dotfiles repo."
 
@@ -124,17 +126,17 @@
 
   # setup vim
   echo "Setting up vim..."
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim >> ${COUT}
   vim +PluginInstall +qall
   mkdir ~/.vim/undo
 
   # install nvm
   echo "Installing nvm..."
-  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash >> ${COUT}
   source ~/.bash_profile
-  nvm install stable
-  nvm use stable
-  nvm alias default stable
+  nvm install stable >> ${COUT}
+  nvm use stable >> ${COUT}
+  nvm alias default stable >> ${COUT}
 
   # echo switch shells command
   echo "To finish setup, execute the following command:"
