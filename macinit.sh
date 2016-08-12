@@ -84,14 +84,14 @@
   ssh-add ~/.ssh/id_rsa >> ${COUT}
 
   # add key to github
-  read -p 'GitHub username: ' uname
-  read -sp 'GitHub password: ' passwd
+  read -p 'GitHub username: ' un
+  read -sp 'GitHub password: ' pw
   curl -u \
-    "${uname}:${passwd}" \
+    "${un}:${pw}" \
     --data '{"title":"${HOSTNAME}","key":"$(cat ~/.ssh/id_rsa.pub)"}' \
     https://api.github.com/user/keys >> ${COUT}
-  unset uname
-  unset passwd
+  unset un
+  unset pw
   echo "Added ssh key to GitHub."
 
   # clone repos
