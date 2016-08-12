@@ -100,29 +100,11 @@
   unset dotfiles
   echo "Cloned dotfiles repo."
 
-  # link the dotfiles
-  echo "Linking dotfiles..."
-  if [ -f ~/src/dotfiles/bash_aliases ]; then
-    ln -s ~/src/dotfiles/bash_aliases ~/.bash_aliases
-  fi
-  if [ -f ~/src/dotfiles/bash_colors ]; then
-    ln -s ~/src/dotfiles/bash_colors ~/.bash_colors
-  fi
-  if [ -f ~/src/dotfiles/bashrc ]; then
-    ln -s ~/src/dotfiles/bashrc ~/.bash_profile
-  fi
-  if [ -f ~/src/dotfiles/gitconfig ]; then
-    ln -s ~/src/dotfiles/gitconfig ~/.gitconfig
-  fi
-  if [ -f ~/src/dotfiles/gitignore ]; then
-    ln -s ~/src/dotfiles/gitignore ~/.gitignore
-  fi
-  if [ -f ~/src/dotfiles/tmux.conf ]; then
-    ln -s ~/src/dotfiles/tmux.conf ~/.tmux.conf
-  fi
-  if [ -f ~/src/dotfiles/vimrc ]; then
-    ln -s ~/src/dotfiles/vimrc ~/.vimrc
-  fi
+  # install dotfiles
+  echo "Installing dotfiles..."
+  pushd ~/src/dotfiles >> ${COUT}
+  ./install.sh
+  popd >> ${COUT}
 
   # setup vim
   echo "Setting up vim..."
