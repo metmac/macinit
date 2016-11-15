@@ -23,11 +23,14 @@
     Caskroom/cask/brew-cask
     Caskroom/cask/haskell-platform
     Caskroom/cask/java
+    cmake
     coreutils
+    clojurescript
     closure-compiler
     ffmpeg
     findutils
     git
+    gnutls
     golang
     homebrew/dupes/grep
     htop
