@@ -111,8 +111,8 @@
 
   # setup vim
   echo "Setting up vim..."
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim >> ${COUT}
-  vim +PluginInstall +qall
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim >> ${COUT}
+  vim +PlugInstall +qall
   mkdir ~/.vim/undo
 
   # install nvm
