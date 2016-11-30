@@ -2,14 +2,12 @@
 
 # macinit.sh
 # Brandon Freitag, 2016
-# Inspired by Lapwing Labs
-# https://github.com/lapwinglabs/blog/blob/master/hacker-guide-to-setting-up-your-mac.md
 
 {
   LOG=macinit.log
 
   # install brew
-  if test ! $(which brew); then
+  if test ! `which brew`; then
     echo "Installing homebrew..."
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" >> $LOG
   fi
@@ -77,7 +75,7 @@
   read -sp 'GitHub password: ' pw
   curl -u \
     "${un}:${pw}" \
-    --data '{"title":"${HOSTNAME}","key":"$(cat ~/.ssh/id_rsa.pub)"}' \
+    --data "{\"title\":\"${HOSTNAME}\",\"key\":\"$(cat ~/.ssh/id_rsa.pub)\"}" \
     https://api.github.com/user/keys >> $LOG
   unset un
   unset pw
@@ -85,15 +83,15 @@
 
   # clone repos
   read -p "Dotfiles repo path: " dotfiles
-  git clone https://github.com/${dotfiles}  ~/src/dotfiles >> $LOG
+  git clone https://github.com/$dotfiles  ~/src/dotfiles >> $LOG
   unset dotfiles
   echo "Cloned dotfiles repo."
 
   # install dotfiles
   echo "Installing dotfiles..."
-  pushd ~/src/dotfiles >> $LOG
+  cd ~/src/dotfiles
   ./install.sh
-  popd >> $LOG
+  cd ~
 
   # setup vim
   echo "Setting up vim..."
