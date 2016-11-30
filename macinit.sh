@@ -57,8 +57,7 @@
   # install apps
   echo "Installing apps..."
   apps=(
-    firefox
-    google-chrome
+    chromium
     iterm2
     sketch
     spotify
