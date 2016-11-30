@@ -21,12 +21,9 @@
     bash
     bash-completion
     Caskroom/cask/brew-cask
-    Caskroom/cask/haskell-platform
     Caskroom/cask/java
     cmake
     coreutils
-    clojurescript
-    closure-compiler
     ffmpeg
     findutils
     git
@@ -37,13 +34,9 @@
     irssi
     leiningen
     lua
-    mongodb
-    mutt
     nmap
     python
     python3
-    screenfetch
-    reattach-to-user-namespace
     rust
     tmux
     vim
