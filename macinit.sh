@@ -57,17 +57,11 @@
   # install apps
   echo "Installing apps..."
   apps=(
-    dropbox
-    evernote
     firefox
     google-chrome
     iterm2
     sketch
-    skype
-    slack
     spotify
-    transmission
-    vlc
   )
   brew cask install --appdir="/Applications" ${apps[@]} >> $LOG
 
