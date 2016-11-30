@@ -118,6 +118,6 @@
   nvm alias default stable >> $LOG
 
   # echo switch shells command
-  echo "To finish setup, execute the following command:"
-  echo "chsh -s /usr/local/bin/bash"
+  echo -e "To finish setup, execute the following command:\n"
+  echo -e "\tchsh -s /usr/local/bin/bash"
 }
