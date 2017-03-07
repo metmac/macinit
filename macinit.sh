@@ -33,6 +33,7 @@
     leiningen
     lua
     nmap
+    nvim
     python
     python3
     rust
