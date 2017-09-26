@@ -43,10 +43,10 @@
   brew cleanup
 
   # setup git
-  read -p 'Name: ' name
+  read -p "Name: " name
   git config --global user.name "${name}"
   unset name
-  read -p 'Email: ' email
+  read -p "Email: " email
   git config --global user.email "${email}"
   echo "Set up git."
 
@@ -58,8 +58,8 @@
   ssh-add ~/.ssh/id_rsa
 
   # add key to github
-  read -p 'GitHub username: ' un
-  read -sp 'GitHub password: ' pw
+  read -p "GitHub username: " un
+  read -sp "GitHub password: " pw
   curl -u \
     "${un}:${pw}" \
     --data "{\"title\":\"${HOSTNAME}\",\"key\":\"$(cat ~/.ssh/id_rsa.pub)\"}" \
