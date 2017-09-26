@@ -4,6 +4,13 @@
 # Brandon Freitag, 2017
 
 {
+  read -p "Full Name: " name
+  read -p "Email: " email
+  read -p "GitHub username: " un
+  read -sp "GitHub password: " pw
+  read -p "Dotfiles repo name (dotfiles): " dotfiles
+  dotfiles=${dotfiles:-dotfiles}
+
   # install brew
   if test ! `which brew`; then
     echo "Installing homebrew..."
@@ -43,10 +50,8 @@
   brew cleanup
 
   # setup git
-  read -p "Name: " name
   git config --global user.name "${name}"
   unset name
-  read -p "Email: " email
   git config --global user.email "${email}"
   echo "Set up git."
 
@@ -58,8 +63,6 @@
   ssh-add ~/.ssh/id_rsa
 
   # add key to github
-  read -p "GitHub username: " un
-  read -sp "GitHub password: " pw
   curl -u \
     "${un}:${pw}" \
     --data "{\"title\":\"${HOSTNAME}\",\"key\":\"$(cat ~/.ssh/id_rsa.pub)\"}" \
@@ -69,15 +72,14 @@
   echo "Added ssh key to GitHub."
 
   # clone repos
-  read -p "Dotfiles repo path: " dotfiles
-  git clone https://github.com/$dotfiles  ~/src/dotfiles
+  git clone "https://github.com/$un/$dotfiles"  ~/src/dotfiles
   unset dotfiles
   echo "Cloned dotfiles repo."
 
   # install dotfiles
   echo "Installing dotfiles..."
   cd ~/src/dotfiles
-  ./install.sh
+  ./install
   cd ~
 
   # setup vim
