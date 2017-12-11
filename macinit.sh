@@ -96,6 +96,9 @@
   nvm use stable
   nvm alias default stable
 
+  # add new bash to list of usable shells
+  echo "$(which bash)" >> /etc/shells
+
   # echo switch shells command
   echo -e "To finish setup, execute the following command:\n"
   echo -e "\tchsh -s /usr/local/bin/bash"
