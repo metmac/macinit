@@ -60,38 +60,38 @@
   ssh-keygen -t rsa -b 4096 -C "${email}"
   unset email
   eval "$(ssh-agent -s)"
-  ssh-add ~/.ssh/id_rsa
+  ssh-add $HOME/.ssh/id_rsa
 
   # add key to github
   curl -u \
     "${un}:${pw}" \
-    --data "{\"title\":\"${HOSTNAME}\",\"key\":\"$(cat ~/.ssh/id_rsa.pub)\"}" \
+    --data "{\"title\":\"${HOSTNAME}\",\"key\":\"$(cat $HOME/.ssh/id_rsa.pub)\"}" \
     https://api.github.com/user/keys
   unset un
   unset pw
   echo "Added ssh key to GitHub."
 
   # clone repos
-  git clone "https://github.com/$un/$dotfiles"  ~/src/dotfiles
+  git clone "https://github.com/$un/$dotfiles" $HOME/src/dotfiles
   unset dotfiles
   echo "Cloned dotfiles repo."
 
   # install dotfiles
   echo "Installing dotfiles..."
-  cd ~/src/dotfiles
+  cd $HOME/src/dotfiles
   ./install
-  cd ~
+  cd
 
   # setup vim
   echo "Setting up vim..."
-  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   vim +PlugInstall +qall
-  mkdir ~/.vim/undo
+  mkdir $HOME/.vim/undo
 
   # install nvm
   echo "Installing nvm..."
   curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash
-  source ~/.bash_profile
+  source $HOME/.bash_profile
   nvm install stable
   nvm use stable
   nvm alias default stable
