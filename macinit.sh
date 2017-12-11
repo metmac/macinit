@@ -8,8 +8,12 @@
   read -p "Email: " email
   read -p "GitHub username: " un
   read -sp "GitHub password: " pw
+  read -sp "GitHub Homebrew API Token:" token
   read -p "Dotfiles repo name (dotfiles): " dotfiles
   dotfiles=${dotfiles:-dotfiles}
+
+  # setup API Token
+  echo "export HOMEBREW_GITHUB_API_TOKEN=$token" > $HOME/.homebrew_api_token
 
   # install brew
   if test ! `which brew`; then
