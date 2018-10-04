@@ -87,6 +87,7 @@
 
   # clone repos
   git clone "https://github.com/${un}/${dotfiles}" "${HOME}/src/dotfiles"
+  unset un
   unset dotfiles
   echo "Cloned dotfiles repo."
 
