@@ -4,6 +4,8 @@
 # Brandon Freitag, 2017
 
 {
+  set -e
+
   read -p "Full Name: " name
   read -p "Email: " email
   read -p "GitHub username: " un
