@@ -10,7 +10,9 @@
   read -p "Email: " email
   read -p "GitHub username: " un
   read -sp "GitHub password: " pw
-  read -sp "GitHub Homebrew API Token:" token
+  echo
+  read -sp "GitHub Homebrew API Token: " token
+  echo
   read -p "Dotfiles repo name (dotfiles): " dotfiles
   dotfiles=${dotfiles:-dotfiles}
 
@@ -18,7 +20,7 @@
   echo "export HOMEBREW_GITHUB_API_TOKEN=$token" > $HOME/.homebrew_api_token
 
   # install brew
-  if test ! `which brew`; then
+  if test ! $(which brew); then
     echo "Installing homebrew..."
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
@@ -71,12 +73,16 @@
   ssh-add $HOME/.ssh/id_rsa
 
   # add key to github
-  curl -u \
-    "${un}:${pw}" \
+  read -sp "GitHub authentication code: " otp
+  echo
+  curl \
+    -u "${un}:${pw}" \
+    -H "X-GitHub-OTP: ${otp}" \
     --data "{\"title\":\"${HOSTNAME}\",\"key\":\"$(cat $HOME/.ssh/id_rsa.pub)\"}" \
     https://api.github.com/user/keys
   unset un
   unset pw
+  unset otp
   echo "Added ssh key to GitHub."
 
   # clone repos
