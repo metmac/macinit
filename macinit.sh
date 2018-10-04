@@ -28,6 +28,8 @@
     bash
     bash-completion
     caskroom/cask/java
+    chezscheme
+    chicken
     cmake
     coreutils
     ffmpeg
@@ -44,12 +46,12 @@
     python
     python3
     rust
+    sbcl
     tmux
     vim
     youtube-dl
   )
   brew update
-  brew tap homebrew/dupes
   brew install ${binaries[@]}
   brew cleanup
 
