@@ -78,7 +78,7 @@
   curl \
     -u "${un}:${pw}" \
     -H "X-GitHub-OTP: ${otp}" \
-    --data "{\"title\":\"${HOSTNAME}\",\"key\":\"$(cat $HOME/.ssh/id_rsa.pub)\"}" \
+    --data "{\"title\":\"${HOSTNAME%.local}\",\"key\":\"$(cat $HOME/.ssh/id_rsa.pub)\"}" \
     https://api.github.com/user/keys
   unset un
   unset pw
