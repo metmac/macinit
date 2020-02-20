@@ -18,7 +18,7 @@ install_homebrew_and_formulae() {
   echo "Installing formulae from bundle..."
   # formulae=( asciinema bash bash-completion caskroom/cask/java chezscheme chicken cmake coreutils ffmpeg findutils git gnutls golang grep htop irssi leiningen lua nmap python python3 rust sbcl tmux vim youtube-dl)
   brew update
-  brew bundle --file work_Brewfile
+  brew bundle --file=work_Brewfile
   brew cleanup
 }
 
