@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # macinit.sh
-# Brandon Freitag, 2018
+# Michael Metcalf, 2020
+# Inspired by Brandon Freitag (github.com/freitagbr/macinit)
 
 setup_api_token() {
   token="$1"
@@ -14,37 +15,10 @@ install_homebrew_and_formulae() {
     echo "Installing homebrew..."
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
-  echo "Installing formulae..."
-  formulae=(
-    asciinema
-    bash
-    bash-completion
-    caskroom/cask/java
-    chezscheme
-    chicken
-    cmake
-    coreutils
-    ffmpeg
-    findutils
-    git
-    gnutls
-    golang
-    grep
-    htop
-    irssi
-    leiningen
-    lua
-    nmap
-    python
-    python3
-    rust
-    sbcl
-    tmux
-    vim
-    youtube-dl
-  )
+  echo "Installing formulae from bundle..."
+  # formulae=( asciinema bash bash-completion caskroom/cask/java chezscheme chicken cmake coreutils ffmpeg findutils git gnutls golang grep htop irssi leiningen lua nmap python python3 rust sbcl tmux vim youtube-dl)
   brew update
-  brew install "${formulae[@]}"
+  brew bundle --file work_Brewfile
   brew cleanup
 }
 
@@ -61,9 +35,9 @@ generate_ssh_key() {
   un="$2"
   pw="$3"
   echo "Generating ssh key..."
-  ssh-keygen -t rsa -b 4096 -C "$email"
+  ssh-keygen -t rsa -b 4096 -C "$email" -f "$HOME/.ssh/${HOSTNAME%.local}_id_rsa"
   eval "$(ssh-agent -s)"
-  ssh-add "$HOME/.ssh/id_rsa"
+  ssh-add "$HOME/.ssh/${HOSTNAME%.local}_id_rsa"
   read -sp "GitHub authentication code: " otp
   echo
   echo "Adding ssh key to GitHub..."
@@ -71,7 +45,7 @@ generate_ssh_key() {
     -o /dev/null \
     -u "$un:$pw" \
     -H "X-GitHub-OTP: $otp" \
-    --data "{\"title\":\"${HOSTNAME%.local}\",\"key\":\"$(cat ${HOME}/.ssh/id_rsa.pub)\"}" \
+    --data "{\"title\":\"${HOSTNAME%.local}\",\"key\":\"$(cat ${HOME}/.ssh/${HOSTNAME%.local}_id_rsa.pub)\"}" \
     https://api.github.com/user/keys
   unset otp
 }
